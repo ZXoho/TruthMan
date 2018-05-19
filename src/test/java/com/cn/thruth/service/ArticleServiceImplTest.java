@@ -1,7 +1,7 @@
-package com.cn.thruth.service;
+package com.cn.truth.service;
 
-import com.cn.thruth.dao.ArticleInfoDao;
-import com.cn.thruth.dataobject.ArticleInfo;
+import com.cn.truth.dao.ArticleInfoDao;
+import com.cn.truth.dataobject.ArticleInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

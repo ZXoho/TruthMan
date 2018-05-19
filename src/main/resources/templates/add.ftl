@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,9 @@
 <form action="/thruth/manager/article/save" method="post">
     <div>
         <!--加入ckdeitor类使其为富文本编辑器-->
+        <label>
         <textarea class="ckeditor" name="edi"></textarea>
+        </label>
     </div>
     <input type="submit" value="提交" />
 </form>
