@@ -9,4 +9,4 @@ spring:
 
 server:
   servlet:
-    context-path: /thruth
+    context-path: /truth

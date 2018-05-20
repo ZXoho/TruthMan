@@ -1,7 +1,8 @@
-package com.cn.truth.service;
+package com.cn.truth.service.impl;
 
 import com.cn.truth.dao.ArticleInfoDao;
 import com.cn.truth.dataobject.ArticleInfo;
+import com.cn.truth.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
