@@ -6,6 +6,9 @@ spring:
     url: jdbc:mysql://localhost:3306/thruth?characterEncoding=utf-8&useSSL=false
   jap:
     show-sql: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
 
 server:
   servlet:
