@@ -1,14 +1,14 @@
  ##API列表
  
- ###获取文章列表
+ ###用户获取文章列表
 ```
 GET /user/article/list
 ````
-####参数
+#####参数
 ```
 无
 ```
-####返回
+#####返回
 ```
 {
    "code" : 0,
@@ -22,15 +22,15 @@ GET /user/article/list
 }     
 ```
 
-###获取未处理新闻
+###用户获取未处理新闻
 ```
 GET /user/news/list
 ```
-####参数
+#####参数
 ```
 无
 ```
-####返回
+#####返回
 ```
 {
    "code" : 0,
@@ -44,15 +44,15 @@ GET /user/news/list
 }
 ```
 
-###上传虚假消息
+###用户上传虚假消息
 ```
 POST /user/news/upload
 ```
-####参数
+#####参数
 ```
 "newsUrl" : "............."
 ```
-####返回
+#####返回
 ```
 {
   "code" : 0,
@@ -67,11 +67,11 @@ POST /user/news/upload
 ```
 POST /user/comment
 ```
-####参数
+#####参数
 ```
 "message" : "今天天气真好"
 ```
-####返回
+#####返回
 ```
 "returnMessage" : "评论成功"
 ```
@@ -79,11 +79,11 @@ POST /user/comment
 ```
 GET /user/info
 ```
-####参数
+#####参数
 ```
 无
 ```
-####返回
+#####返回
 ```
 {
   "code" : 0,
@@ -93,11 +93,60 @@ GET /user/info
        "userPoints" : 50,
        "userComments" : 
           [
-             "今天天气真好",
-             "他好帅啊"
+            "message" : "今天天气真好",
+            "url" : ".........."
+          ]
+          [
+             "message" : "他好帅啊",
+             "url" : "........."
           ]
     ]
 }
+```
+
+###用户登录获取openid
+```
+GET /user/login
+```
+#####参数
+```
+"code"  //前端传递的code，以此获得openid
+```
+
+
+###后台获取待处理消息
+```
+GET /manager/news/list
+```
+#####参数
+```
+无
+```
+#####返回
+```
+"newsId"
+"newsCreateTime"
+"newsUrl"
+```
+
+###后台新闻处理
+```
+POST /manager/news/edit
+```
+
+###后台添加文章
+```
+POST /manager/article/add
+```
+
+###后台文章修改
+```
+GET /manager/article/index
+```
+
+###后台文章删除
+```
+POST /manager/article/delete
 ```
 
 
