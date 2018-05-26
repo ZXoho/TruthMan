@@ -4,10 +4,10 @@ package com.cn.truth.service.impl;
 
 import com.cn.truth.dao.NewsInfoDao;
 import com.cn.truth.dataobject.NewsInfo;
-
 import com.cn.truth.service.NewsService;
-import com.cn.truth.service.mapper.NewsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -17,8 +17,6 @@ public class NewsServiceImpl implements NewsService {
 
     @Autowired
     private NewsInfoDao newsInfoDao;
-    @Autowired
-    private NewsMapper newsMapper;
 
     @Override
     public NewsInfo create(NewsInfo news) {
@@ -61,8 +59,8 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public NewsInfo selectUnsolvedNew() {
-        NewsInfo result = newsMapper.selectUnsolvedNews();
-        return result;
+    public Page<NewsInfo> selectUnsolvedNews(Integer newsType, Pageable pageable) {
+        Page<NewsInfo> newsInfoPage = newsInfoDao.findByNewsType(0, pageable);
+        return newsInfoPage;
     }
 }

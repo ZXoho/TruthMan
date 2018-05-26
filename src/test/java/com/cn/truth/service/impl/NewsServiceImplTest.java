@@ -2,15 +2,14 @@ package com.cn.truth.service.impl;
 
 import com.cn.truth.dataobject.NewsInfo;
 import com.cn.truth.service.NewsService;
-import com.cn.truth.service.mapper.NewsMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -47,7 +46,8 @@ public class NewsServiceImplTest {
 
     @Test
     public void selectUnsolvedNew() {
-        NewsInfo result = newsService.selectUnsolvedNew();
+        PageRequest pageRequest = new PageRequest(0,2);
+        Page<NewsInfo> result = newsService.selectUnsolvedNews(0, pageRequest);
         Assert.assertNotNull(result);
     }
 }
