@@ -15,6 +15,6 @@ public interface NewsInfoDao extends JpaRepository<NewsInfo, String> {
     @Transactional
     int deleteByNewsId(Integer newsId);
 
-    Page<NewsInfo> findByNewsType(Integer newsType, Pageable pageable);
+    List<NewsInfo> findByNewsType(Integer newsType);
 }
 

@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -50,7 +52,8 @@ public class NewsServiceImpl implements NewsService {
         NewsInfo news = newsInfoDao.findByNewsId(newsId);
         if(news.getNewsType() == 1) {
             news.setNewsType(0);
-            NewsInfo result = newsInfoDao.save(news);
+            NewsInfo result = new NewsInfo();
+            newsInfoDao.save(news);
             return result;
         }else {
             return null;
@@ -59,8 +62,9 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public Page<NewsInfo> selectUnsolvedNews(Integer newsType, Pageable pageable) {
-        Page<NewsInfo> newsInfoPage = newsInfoDao.findByNewsType(0, pageable);
-        return newsInfoPage;
+    public List<NewsInfo> selectUnsolvedNews() {
+        List<NewsInfo> newsInfoList = new ArrayList<>();
+        newsInfoList = newsInfoDao.findByNewsType(0);
+        return newsInfoList;
     }
 }

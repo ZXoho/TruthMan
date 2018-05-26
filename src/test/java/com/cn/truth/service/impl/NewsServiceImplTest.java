@@ -11,6 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class NewsServiceImplTest {
@@ -46,8 +49,9 @@ public class NewsServiceImplTest {
 
     @Test
     public void selectUnsolvedNew() {
-        PageRequest pageRequest = new PageRequest(0,2);
-        Page<NewsInfo> result = newsService.selectUnsolvedNews(0, pageRequest);
+        List<NewsInfo> result = new ArrayList<>();
+        result = newsService.selectUnsolvedNews();
+        System.out.println(result);
         Assert.assertNotNull(result);
     }
 }

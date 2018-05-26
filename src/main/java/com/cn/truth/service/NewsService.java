@@ -1,9 +1,9 @@
 package com.cn.truth.service;
 
 import com.cn.truth.dataobject.NewsInfo;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -26,6 +26,6 @@ public interface NewsService {
      * 查询未辟谣新闻
      * 接口在mapper中
      */
-    Page<NewsInfo> selectUnsolvedNews(Integer newsType, Pageable pageable);
+    List<NewsInfo> selectUnsolvedNews();
 
 }
