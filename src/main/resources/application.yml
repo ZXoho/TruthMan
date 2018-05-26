@@ -13,3 +13,5 @@ spring:
 server:
   servlet:
     context-path: /truth
+mybatis:
+  mapper-locations: Classpath:mapper/*.xml

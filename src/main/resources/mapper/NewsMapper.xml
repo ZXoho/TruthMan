@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper>
+    <resultMap id="BaseResultMap" type="com.cn.truth.dataobject.NewsInfo">
+        <id column="news_create_time" property="newsCreateTime" jdbcType="TIMESTAMP"/>
+        <id column="news_url" property="newsUrl" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectUnsolvedNews" resultMap="BaseResultMap">
+        select news_create_time, news_url
+        from news_info
+        where news_type = 0
+    </select>
+</mapper>
