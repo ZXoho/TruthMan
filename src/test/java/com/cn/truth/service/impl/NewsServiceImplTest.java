@@ -20,8 +20,8 @@ public class NewsServiceImplTest {
     @Test
     public void create() {
         NewsInfo news = new NewsInfo();
-        news.setNewsUrl("http://liveboycams.org/couple-cams/");
-        news.setNewsId(1);
+        news.setNewsUrl("https://unbug.github.io/");
+        //news.setNewsId(1);
         news.setNewsType(0);
         NewsInfo result = newsService.create(news);
         Assert.assertNotNull(result);
