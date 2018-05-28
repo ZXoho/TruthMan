@@ -8,7 +8,7 @@ import java.util.Date;
 public class NewsCommentVO {
 
     /** 用户openid */
-    //private String userOpenid;
+    private String userOpenid;
 
     /** 用户评论 */
     private String comment;

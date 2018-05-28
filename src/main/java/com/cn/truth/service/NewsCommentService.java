@@ -4,6 +4,7 @@ import com.cn.truth.VO.NewsCommentVO;
 import com.cn.truth.dataobject.NewsCommentInfo;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -16,5 +17,8 @@ public interface  NewsCommentService {
     void delete(Integer commentId);
 
     /** 用户获取已评论 */
-    List<NewsCommentVO> list(String userOpenid);
+    List<NewsCommentInfo> userCommentList(String userOpenid);
+
+    /** 获取新闻评论 */
+    List<NewsCommentInfo> newsCommentList(Integer newsId);
 }

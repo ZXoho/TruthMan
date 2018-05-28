@@ -9,5 +9,6 @@ import java.util.List;
 public interface NewsCommentDao extends JpaRepository<NewsCommentInfo, Integer> {
     List<NewsCommentInfo> findByNewsId(Integer newsId);
     List<NewsCommentInfo> findByUserOpenid(String userOpenid);
+    void deleteByCommentId(Integer commentId);
 
 }

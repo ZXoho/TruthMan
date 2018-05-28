@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -34,9 +37,23 @@ public class NewsCommentServiceImplTest {
 
     @Test
     public void delete() {
+       newsCommentService.delete(1);
+
     }
 
     @Test
-    public void list() {
+    public void userCommentList() {
+        List<NewsCommentInfo> result = new ArrayList<>();
+        result = newsCommentService.userCommentList("s4fgvc56s4z");
+        Assert.assertNotNull(result);
+        System.out.println(result);
+    }
+
+    @Test
+    public void newsCommentList() {
+        List<NewsCommentInfo> result = new ArrayList<>();
+        result = newsCommentService.newsCommentList(2);
+        Assert.assertNotNull(result);
+        System.out.println(result);
     }
 }

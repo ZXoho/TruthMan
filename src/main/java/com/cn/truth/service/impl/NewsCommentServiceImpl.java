@@ -7,6 +7,8 @@ import com.cn.truth.service.NewsCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,12 +25,23 @@ public class NewsCommentServiceImpl implements NewsCommentService {
     }
 
     @Override
+    @Transactional
     public void delete(Integer commentId) {
+        newsCommentDao.deleteByCommentId(commentId);
 
     }
 
     @Override
-    public List<NewsCommentVO> list(String userOpenid) {
-        return null;
+    public List<NewsCommentInfo> userCommentList(String userOpenid) {
+        List<NewsCommentInfo> commentInfoList =new ArrayList<>();
+        commentInfoList = newsCommentDao.findByUserOpenid(userOpenid);
+        return commentInfoList;
+    }
+
+    @Override
+    public List<NewsCommentInfo> newsCommentList(Integer newsId) {
+        List<NewsCommentInfo> newsCommentInfoList = new ArrayList<>();
+        newsCommentInfoList = newsCommentDao.findByNewsId(newsId);
+        return newsCommentInfoList;
     }
 }
