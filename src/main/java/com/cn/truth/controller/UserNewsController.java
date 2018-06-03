@@ -122,7 +122,7 @@ public class UserNewsController {
         }
         try {
             newsCommentService.delete(commentId);
-            System.out.println("删除成功");
+            
         }catch (Exception e){
             e.printStackTrace();
         }
