@@ -5,5 +5,5 @@ user_openid varchar(32) not null,
 comment_id integer not null auto_increment,
 comment text not null,
 comment_create_time timestamp not null DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
-primary key(commentId)
+primary key(comment_id)
 )

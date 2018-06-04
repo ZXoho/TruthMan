@@ -4,7 +4,7 @@ import lombok.Data;
 
 import java.util.Date;
 
-/** 新闻试图类 */
+/** 新闻视图类 */
 
 @Data
 public class NewsVO {
@@ -14,5 +14,8 @@ public class NewsVO {
 
     /** 新闻上传时间 */
     private Date newsCreateTime;
+
+    /** 上传用户openid */
+    private String userOpenid;
 
 }

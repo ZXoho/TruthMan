@@ -9,6 +9,6 @@ spring:
 
 server:
   servlet:
-    context-path: /truth
+    context-path: /truthMan
 mybatis:
   mapper-locations: Classpath:mapper/*.xml

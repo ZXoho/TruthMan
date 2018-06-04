@@ -4,9 +4,11 @@ import com.cn.truth.dao.ArticleInfoDao;
 import com.cn.truth.dataobject.ArticleInfo;
 import com.cn.truth.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ArticleServiceImpl implements ArticleService {
 
     @Autowired

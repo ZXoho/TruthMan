@@ -15,4 +15,7 @@ public class NewsCommentVO {
 
     /** 评论创建时间 */
     private Date commentCreateTime;
+
+    /** 评论Id */
+    private Integer commentId;
 }

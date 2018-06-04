@@ -14,6 +14,7 @@ import com.cn.truth.enums.ResultEnum;
 import com.cn.truth.form.NewsCommentForm;
 import com.cn.truth.service.NewsCommentService;
 import com.cn.truth.service.NewsService;
+import com.cn.truth.service.UserService;
 import com.cn.truth.util.ResultVOUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -37,21 +38,24 @@ public class UserNewsController {
     private NewsService newsService;
     @Autowired
     private NewsCommentService newsCommentService;
+    @Autowired
+    private UserService userService;
 
 
     //用户上传新闻
-    @GetMapping("/create")
-    public NewsVO create(@RequestParam("newsUrl") String newsUrl,
-                         @RequestParam(value = "newsType", defaultValue = "0") Integer newsType) {
+    @GetMapping("/upload")
+    public NewsInfo upload(@RequestParam("newsUrl") String newsUrl,
+                         @RequestParam(value = "newsType", defaultValue = "0") Integer newsType,
+                         @RequestParam(value = "userOpenid") String userOpenid,
+                         @RequestParam(value = "point") Integer point) {
         NewsInfo news = new NewsInfo();
         news.setNewsUrl(newsUrl);
         news.setNewsType(newsType);
+        news.setUserOpenid(userOpenid);
         NewsInfo result = newsService.create(news);
-        if (result != null) {
-            NewsVO newsVO = new NewsVO();
-            newsVO.setNewsUrl(result.getNewsUrl());
-            newsVO.setNewsCreateTime(result.getNewsCreateTime());
-            return newsVO;
+        if(result != null) {
+            userService.addPoint(userOpenid, point);
+            return result;
         } else {
             log.error("【上传新闻】 上传失败");
             throw new RunException(ResultEnum.UPLOAD_FAIL);
@@ -69,19 +73,19 @@ public class UserNewsController {
 
     //用户发表评论
     @PostMapping("/comment")
-    public NewsCommentVO comment(@Valid NewsCommentForm newsCommentForm,
-                                 BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
-            log.error("【添加评论】 评论失败");
-            throw new RunException(ResultEnum.COMMENT_FAIL);
-        }
+    public NewsCommentVO comment(@RequestParam(value = "comment") String comment,
+                                 @RequestParam(value = "newsId") Integer newsId,
+                                 @RequestParam(value = "newsUrl") String newsUrl,
+                                 @RequestParam(value = "userOpenid") String userOpenid,
+                                 @RequestParam(value = "point") Integer point){
         NewsCommentInfo newsComment = new NewsCommentInfo();
-        newsComment.setComment(newsCommentForm.getComment());
-        newsComment.setNewsId(newsCommentForm.getNewsId());
-        newsComment.setNewsUrl(newsCommentForm.getNewsUrl());
-        newsComment.setUserOpenid(newsCommentForm.getUserOpenid());
+        newsComment.setComment(comment);
+        newsComment.setNewsId(newsId);
+        newsComment.setNewsUrl(newsUrl);
+        newsComment.setUserOpenid(userOpenid);
         NewsCommentInfo result = newsCommentService.create(newsComment);
         NewsCommentVO newsCommentVO = NewsCommentInfo2NewsCommentVO.convert(result);
+        userService.addPoint(userOpenid, point);
         return newsCommentVO;
     }
 
@@ -104,10 +108,6 @@ public class UserNewsController {
             throw new RunException(ResultEnum.PARAM_ERROR);
         }
         List<NewsCommentInfo> newsCommentInfoList = newsCommentService.userCommentList(userOpenid);
-        if(newsCommentInfoList.isEmpty()) {
-            log.error("【用户评论】查询失败");
-            throw new RunException(ResultEnum.FIND_FAIL);
-        }
         List<UserCommentVO> userCommentVOList = new ArrayList<>();
         userCommentVOList = NewsCommentInfo2UserCommentVO.convert(newsCommentInfoList);
         return userCommentVOList;
