@@ -44,4 +44,22 @@ public class NewsCommentServiceImpl implements NewsCommentService {
         newsCommentInfoList = newsCommentDao.findByNewsId(newsId);
         return newsCommentInfoList;
     }
+
+    @Override
+    public NewsCommentInfo thumb(Integer commentId) {
+        NewsCommentInfo newsComment = newsCommentDao.findByCommentId(commentId);
+        Integer newThumbs = newsComment.getThumbs() + 1;
+        newsComment.setThumbs(newThumbs);
+        newsCommentDao.save(newsComment);
+        return newsComment;
+    }
+
+    @Override
+    public NewsCommentInfo disThumb(Integer commentId) {
+        NewsCommentInfo newsComment = newsCommentDao.findByCommentId(commentId);
+        Integer newThumbs = newsComment.getThumbs() - 1;
+        newsComment.setThumbs(newThumbs);
+        newsCommentDao.save(newsComment);
+        return newsComment;
+    }
 }

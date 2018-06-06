@@ -127,6 +127,30 @@ public class UserNewsController {
             e.printStackTrace();
         }
     }
+
+    //用户点赞
+    @GetMapping("/thumb")
+    public NewsCommentVO thumb(@RequestParam("commentId") Integer commentId) {
+        if(commentId == null) {
+            log.error("【点赞】 评论Id为空");
+            throw new RunException(ResultEnum.PARAM_ERROR);
+        }
+        NewsCommentInfo newsComment = newsCommentService.thumb(commentId);
+        NewsCommentVO result = NewsCommentInfo2NewsCommentVO.convert(newsComment);
+        return result;
+    }
+
+    //用户取消点赞
+    @GetMapping("/disThumb")
+    public NewsCommentVO disThumb(@RequestParam("commentId") Integer commentId) {
+        if(commentId == null) {
+            log.error("【点赞】 评论Id为空");
+            throw new RunException(ResultEnum.PARAM_ERROR);
+        }
+        NewsCommentInfo newsComment = newsCommentService.disThumb(commentId);
+        NewsCommentVO result = NewsCommentInfo2NewsCommentVO.convert(newsComment);
+        return result;
+    }
 }
 
 

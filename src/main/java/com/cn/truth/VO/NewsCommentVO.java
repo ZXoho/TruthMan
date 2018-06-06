@@ -18,4 +18,7 @@ public class NewsCommentVO {
 
     /** 评论Id */
     private Integer commentId;
+
+   /** 点赞数 */
+   private Integer thumbs;
 }
