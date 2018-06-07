@@ -56,4 +56,16 @@ public class NewsCommentServiceImplTest {
         Assert.assertNotNull(result);
         System.out.println(result);
     }
+
+    @Test
+    public void thumb() {
+        NewsCommentInfo result = newsCommentService.thumb(1);
+        System.out.println(result);
+    }
+
+    @Test
+    public void disThumb() {
+        NewsCommentInfo result = newsCommentService.disThumb(1);
+        System.out.println(result);
+    }
 }
