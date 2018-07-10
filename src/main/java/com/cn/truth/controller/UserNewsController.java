@@ -18,6 +18,9 @@ import com.cn.truth.util.ResultVOUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.validation.BindingResult;
@@ -41,6 +44,7 @@ public class UserNewsController {
 
     //用户上传新闻
     @GetMapping("/create")
+    @CachePut(cacheNames = "news", key = "123")
     public NewsVO create(@RequestParam("newsUrl") String newsUrl,
                          @RequestParam(value = "newsType", defaultValue = "0") Integer newsType) {
         NewsInfo news = new NewsInfo();
@@ -58,8 +62,20 @@ public class UserNewsController {
         }
     }
 
+    //删除新闻
+    @GetMapping("delete")
+    @CacheEvict(cacheNames = "news", key = "123")
+    public ResultVO delete(@RequestParam("newsId") Integer newsId) {
+        newsService.delete(newsId);
+        List<NewsInfo> newsInfoList = new ArrayList<>();
+        newsInfoList = newsService.selectUnsolvedNews();
+        List<NewsVO> newsVOList = NewsInfo2NewsVO.convert(newsInfoList);
+        return ResultVOUtil.success(newsVOList);
+    }
+
     //用户获取待处理新闻
     @GetMapping("/list")
+    @Cacheable(cacheNames = "news", key = "123")
     public ResultVO list(){
         List<NewsInfo> newsInfoList = new ArrayList<>();
         newsInfoList = newsService.selectUnsolvedNews();
@@ -69,6 +85,7 @@ public class UserNewsController {
 
     //用户发表评论
     @PostMapping("/comment")
+    @CachePut(cacheNames = "news", key = "123")
     public NewsCommentVO comment(@Valid NewsCommentForm newsCommentForm,
                                  BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -88,6 +105,7 @@ public class UserNewsController {
 
     //获取新闻评论
     @GetMapping("/getNewsComment")
+    @Cacheable(cacheNames = "news", key = "123")
     public List<NewsCommentVO> getNewsComment(@RequestParam("newsId") Integer newsOpenid) {
        List<NewsCommentInfo> newsCommentInfoList = new ArrayList<>();
        newsCommentInfoList = newsCommentService.newsCommentList(newsOpenid);
@@ -98,6 +116,7 @@ public class UserNewsController {
 
     //获取用户评论历史
     @GetMapping("/getUserComment")
+    @Cacheable(cacheNames = "news", key = "123")
     public List<UserCommentVO> getUserComment(@RequestParam("userOpenid") String userOpenid) {
         if(userOpenid.isEmpty()) {
             log.error("【用户评论】 用户openid为空");
@@ -115,6 +134,7 @@ public class UserNewsController {
 
     //用户删除评论
     @GetMapping("/deleteComment")
+    @CacheEvict(cacheNames = "news", key = "123")
     public void deleteComment(@RequestParam("commentId") Integer commentId) {
         if(commentId == null) {
             log.error("【删除评论】 评论Id为空");

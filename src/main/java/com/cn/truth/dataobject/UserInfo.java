@@ -12,7 +12,7 @@ public class UserInfo {
     @Id
     private String userOpenid;
 
-    private Integer userPoint;
+    private Integer userPoint = 0;
 
     private String userAddress;
 }

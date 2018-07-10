@@ -6,13 +6,10 @@ import com.cn.truth.dao.NewsInfoDao;
 import com.cn.truth.dataobject.NewsInfo;
 import com.cn.truth.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Service
 public class NewsServiceImpl implements NewsService {
@@ -27,7 +24,6 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-
     public void delete(Integer newsId) {
         newsInfoDao.deleteByNewsId(newsId);
 
@@ -42,9 +38,7 @@ public class NewsServiceImpl implements NewsService {
             return result;
         } else {
             return null;
-
         }
-
     }
 
     @Override
@@ -58,7 +52,6 @@ public class NewsServiceImpl implements NewsService {
         }else {
             return null;
         }
-
     }
 
     @Override

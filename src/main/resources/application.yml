@@ -6,6 +6,9 @@ spring:
     url: jdbc:mysql://localhost:3306/thruth?characterEncoding=utf-8&useSSL=false
   jap:
     show-sql: true
+  redis:
+    port: 8080
+    host: 127.0.0.1
 
 server:
   servlet:
