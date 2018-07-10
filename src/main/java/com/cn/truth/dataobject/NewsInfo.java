@@ -17,6 +17,9 @@ public class NewsInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer newsId;
 
+    /** 上传用户openid */
+    private String userOpenid;
+
     /** 新闻类型 默认0为待辟谣， 1为已辟谣 */
     private Integer newsType;
 

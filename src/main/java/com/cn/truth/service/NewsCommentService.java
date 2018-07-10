@@ -21,4 +21,10 @@ public interface  NewsCommentService {
 
     /** 获取新闻评论 */
     List<NewsCommentInfo> newsCommentList(Integer newsId);
+
+    /** 用户评论点赞 */
+    NewsCommentInfo thumb(Integer commentId);
+
+    /** 用户取消点赞 */
+    NewsCommentInfo disThumb(Integer commentId);
 }

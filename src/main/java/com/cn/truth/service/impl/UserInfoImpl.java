@@ -12,6 +12,14 @@ public class UserInfoImpl implements UserService {
     private UserInfoDao userInfoDao;
 
     @Override
+    public UserInfo addUser(String userOpenid) {
+        UserInfo user = new UserInfo();
+        user.setUserOpenid(userOpenid);
+        UserInfo result = userInfoDao.save(user);
+        return result;
+    }
+
+    @Override
     public UserInfo addPoint(String userOpenid, Integer point) {
         UserInfo user = userInfoDao.findByUserOpenid(userOpenid);
         Integer newPoint = user.getUserPoint() + point;
@@ -21,22 +29,34 @@ public class UserInfoImpl implements UserService {
     }
 
     @Override
-    public UserInfo addUserAddress(String userOpenid, String address) {
-        return null;
+    public UserInfo indexUserAddress(String userOpenid, String address) {
+        UserInfo user = userInfoDao.findByUserOpenid(userOpenid);
+        user.setUserAddress(address);
+        UserInfo result = userInfoDao.save(user);
+        return result;
     }
 
     @Override
     public UserInfo deleteUserAddress(String userOpenid) {
-        return null;
+        UserInfo user = userInfoDao.findByUserOpenid(userOpenid);
+        user.setUserAddress(null);
+        UserInfo result = userInfoDao.save(user);
+        return result;
     }
 
     @Override
     public Integer findUserPoint(String userOpenid) {
-        return null;
+        UserInfo user = userInfoDao.findByUserOpenid(userOpenid);
+        Integer userPoint = user.getUserPoint();
+        return userPoint;
     }
 
     @Override
     public String findUserAddress(String userOpenid) {
-        return null;
+        UserInfo user = userInfoDao.findByUserOpenid(userOpenid);
+        String address = user.getUserAddress();
+        return address;
     }
+
+
 }

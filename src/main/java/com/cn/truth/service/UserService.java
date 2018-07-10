@@ -6,6 +6,11 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
 
+    /**
+     * 添加新用户
+     */
+    UserInfo addUser(String userOpenid);
+
     /** 更新积分
      * 评论一次的 2分
      * 采纳得4分
@@ -14,7 +19,7 @@ public interface UserService {
     UserInfo addPoint(String userOpenid, Integer point);
 
     /** 修改地址 */
-    UserInfo addUserAddress(String userOpenid, String address);
+    UserInfo indexUserAddress(String userOpenid, String address);
 
     /** 删除地址 */
     UserInfo deleteUserAddress(String userOpenid);

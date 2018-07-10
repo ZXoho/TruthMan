@@ -29,6 +29,9 @@ public class NewsCommentInfo {
     /** 评论创建时间 */
      private Date commentCreateTime;
 
+    /** 评论点赞数 */
+    private Integer thumbs;
+
 
 
 }

@@ -1,26 +1,4 @@
  ##API列表
- 
- ###用户获取文章列表
-```
-GET /user/article/list
-````
-#####参数
-```
-无
-```
-#####返回
-```
-{
-   "code" : 0,
-   "msg" : "成功",
-   "data" : 
-   [ articleId : 123,
-     articleType : 0,
-     updateTime : "yyyy-mm-dd",
-     content : ".........."
-   ]
-}     
-```
 
 ###用户获取未处理新闻
 ```
@@ -33,120 +11,125 @@ GET /user/news/list
 #####返回
 ```
 {
-   "code" : 0,
-   "msg" : "成功",
-   "data" :
-     [
-        "newsId" : 123,
-        "createTime" : "yyyy-mm-dd",
-        "newsUrl" : "........."
-      ]
+    "code": 0,
+    "msg": "成功",
+    "data": [
+        {
+            "newsUrl": "https://github.com/ZXoho",
+            "newsCreateTime": "2018-06-04T08:46:19.000+0000",
+            "userOpenid": "dg45vb63"
+        },
+        {
+            "newsUrl": "http://unbug.github.io/codelf/",
+            "newsCreateTime": "2018-06-04T08:49:15.000+0000",
+            "userOpenid": "6hg54n5"
+        }
+    ]
 }
 ```
 
 ###用户上传虚假消息
 ```
-POST /user/news/upload
+POST truth/user/news/upload
 ```
 #####参数
 ```
-"newsUrl" : "............."
+"newsUrl" : " "
+"userOpenid" : " "
 ```
 #####返回
 ```
 {
-  "code" : 0,
-  "msg" : "成功”,
-  "data" : 
-    [
-       //TODO 对URL链接进行截图展示
-       ‘newsUrl" : ".............”
-    ]
+    "newsId": 3,
+    "userOpenid": "d4gvb523",
+    "newsType": 0,
+    "newsUrl": "http://op.hanhande.com/",
+    "newsCreateTime": null,
+    "newsUpdateTime": null
+}
 ```
 ###用户评论
 ```
-POST /user/comment
+POST /truth/user/comment
 ```
 #####参数
 ```
 "message" : "今天天气真好"
-```
-#####返回
-```
-"returnMessage" : "评论成功"
-```
-###用户信息查询
-```
-GET /user/info
-```
-#####参数
-```
-无
+"newsId" : " "
+"newsUrl" : " "
+"userOpenid" : " "
+
 ```
 #####返回
 ```
 {
-  "code" : 0,
-  "msg" : "成功"
-  "data" : 
-    [
-       "userPoints" : 50,
-       "userComments" : 
-          [
-            "message" : "今天天气真好",
-            "url" : ".........."
-          ]
-          [
-             "message" : "他好帅啊",
-             "url" : "........."
-          ]
-    ]
+    "userOpenid": "x64v86esd7",
+    "comment": "周鑫我喜欢你",
+    "commentCreateTime": null
 }
 ```
 
-###用户登录获取openid
+###获取新闻评论
 ```
-GET /user/login
-```
-#####参数
-```
-"code"  //前端传递的code，以此获得openid
-```
-
-
-###后台获取待处理消息
-```
-GET /manager/news/list
+GET /truthMan/user/news/getNewsComment
 ```
 #####参数
 ```
-无
+"newsId"
 ```
 #####返回
 ```
-"newsId"
-"newsCreateTime"
-"newsUrl"
+[
+    {
+        "userOpenid": "x64v86esd7",
+        "comment": "这个超好用",
+        "commentCreateTime": "2018-06-04T09:53:22.000+0000",
+        "commentId": 3
+    },
+    {
+        "userOpenid": "x64v86esd7",
+        "comment": "赞",
+        "commentCreateTime": "2018-06-04T09:56:09.000+0000",
+        "commentId": 4
+    },
+    {
+        "userOpenid": "d64gv56wes",
+        "comment": "挺好用的不错，",
+        "commentCreateTime": "2018-06-04T09:57:12.000+0000",
+        "commentId": 5
+    }
+]
 ```
-
-###后台新闻处理
+###用户评论信息查询
 ```
-POST /manager/news/edit
+GET /user/news/getUserComment
 ```
-
-###后台添加文章
+#####参数
 ```
-POST /manager/article/add
+"userOpenid"
 ```
-
-###后台文章修改
+#####返回
 ```
-GET /manager/article/index
-```
-
-###后台文章删除
-```
-POST /manager/article/delete
+[
+    {
+        "newsId": 1,
+        "commentId": 2,
+        "comment": "周鑫我喜欢你",
+        "commentCreateTime": "2018-06-04T09:45:35.000+0000"
+    },
+    {
+        "newsId": 2,
+        "commentId": 3,
+        "comment": "这个超好用",
+        "commentCreateTime": "2018-06-04T09:53:22.000+0000"
+    },
+    {
+        "newsId": 2,
+        "commentId": 4,
+        "comment": "赞",
+        "commentCreateTime": "2018-06-04T09:56:09.000+0000"
+    }
+]
 ```
 
 
