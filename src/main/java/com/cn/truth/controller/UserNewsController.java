@@ -62,17 +62,6 @@ public class UserNewsController {
         }
     }
 
-    //删除新闻
-    @GetMapping("delete")
-    @CacheEvict(cacheNames = "news", key = "123")
-    public ResultVO delete(@RequestParam("newsId") Integer newsId) {
-        newsService.delete(newsId);
-        List<NewsInfo> newsInfoList = new ArrayList<>();
-        newsInfoList = newsService.selectUnsolvedNews();
-        List<NewsVO> newsVOList = NewsInfo2NewsVO.convert(newsInfoList);
-        return ResultVOUtil.success(newsVOList);
-    }
-
     //用户获取待处理新闻
     @GetMapping("/list")
     @Cacheable(cacheNames = "news", key = "123")
@@ -101,7 +90,6 @@ public class UserNewsController {
         NewsCommentVO newsCommentVO = NewsCommentInfo2NewsCommentVO.convert(result);
         return newsCommentVO;
     }
-
 
     //获取新闻评论
     @GetMapping("/getNewsComment")

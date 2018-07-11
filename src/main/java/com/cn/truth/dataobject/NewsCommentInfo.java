@@ -27,10 +27,10 @@ public class NewsCommentInfo {
     private String comment;
 
     /** 评论创建时间 */
-     private Date commentCreateTime;
+    private Date commentCreateTime;
 
     /** 评论点赞数 */
-    private Integer thumbs;
+    private Integer thumbs = 0;
 
 
 

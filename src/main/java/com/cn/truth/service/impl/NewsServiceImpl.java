@@ -26,7 +26,6 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public void delete(Integer newsId) {
         newsInfoDao.deleteByNewsId(newsId);
-
     }
 
     @Override
